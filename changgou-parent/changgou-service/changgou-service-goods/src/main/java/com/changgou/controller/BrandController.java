@@ -31,6 +31,7 @@ public class BrandController {
                                             @PathVariable(value = "page")int page,    //当前页
                                             @PathVariable(value = "size") int size){  //每页显示条数
         PageInfo<Brand> pageList = brandService.findPage(brand,page, size);
+      //  int i = 10 /0;
         return new Result<PageInfo<Brand>>(true,StatusCode.OK,"条件 + 分页查询",pageList);
     }
 
@@ -80,7 +81,8 @@ public class BrandController {
      * 增加品牌
      * @param brand
      */
-    public Result addBrand(@RequestBody Brand brand){
+    @PostMapping
+    public Result add(@RequestBody Brand brand){
         brandService.add(brand);
         return new Result(true, StatusCode.OK,"增加品牌");
     }
@@ -92,7 +94,7 @@ public class BrandController {
      * @return
      */
     @PutMapping(value = "/{id}")
-    public Result updateBrand(@PathVariable(value = "id")Integer id,@RequestBody Brand brand){
+    public Result update(@PathVariable(value = "id")Integer id,@RequestBody Brand brand){
         brand.setId(id);
         brandService.update(brand);
         return new Result(true,StatusCode.OK,"品牌修改成功！");
@@ -104,7 +106,7 @@ public class BrandController {
      * @return
      */
     @DeleteMapping(value = "/{id}")
-    public Result deleteBrand(@PathVariable(value = "id")Integer id){
+    public Result delete(@PathVariable(value = "id")Integer id){
         brandService.delete(id);
         return new Result(true,StatusCode.OK,"品牌删除成功！！！");
     }
