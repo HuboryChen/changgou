@@ -10,6 +10,8 @@ import java.io.Serializable;
  * @Author:admin
  * @Description:Template构建
  * @Date 2019/6/14 19:13
+ *
+ * 模板管理
  *****/
 @ApiModel(description = "Template",value = "Template")
 @Table(name="tb_template")

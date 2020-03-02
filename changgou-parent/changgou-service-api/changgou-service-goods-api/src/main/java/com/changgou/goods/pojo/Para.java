@@ -10,6 +10,8 @@ import java.io.Serializable;
  * @Author:admin
  * @Description:Para构建
  * @Date 2019/6/14 19:13
+ *
+ * 参数管理
  *****/
 @ApiModel(description = "Para",value = "Para")
 @Table(name="tb_para")

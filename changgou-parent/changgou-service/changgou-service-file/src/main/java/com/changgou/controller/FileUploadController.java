@@ -34,7 +34,7 @@ public class FileUploadController {
         String[] uploads = FastDFSUtil.upload(fastDFSFile);
 
         //拼接访问地址 url:http://47.107.160.219:8080/
-       String url = "http://47.107.160.219:8080/"+uploads[0]+"/"+uploads[1];
+       String url =FastDFSUtil.getTrackerInfo()+"/"+uploads[0]+"/"+uploads[1];
 
 //        String url = "http://192.168.0.104:8080/"+uploads[0]+"/"+uploads[1];
         return new Result(true, StatusCode.OK,"文件上传成功",url);

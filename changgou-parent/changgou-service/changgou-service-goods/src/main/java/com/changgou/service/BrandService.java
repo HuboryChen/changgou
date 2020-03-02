@@ -9,6 +9,8 @@ import java.util.List;
  * @Author DL_Wu
  * @Date 2020/2/28 19:26
  * @Version 1.0
+ *
+ * 品牌
  */
 public interface BrandService {
 

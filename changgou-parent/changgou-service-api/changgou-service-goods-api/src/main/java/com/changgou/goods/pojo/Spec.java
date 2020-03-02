@@ -10,6 +10,8 @@ import java.io.Serializable;
  * @Author:admin
  * @Description:Spec构建
  * @Date 2019/6/14 19:13
+ *
+ * 规格管理
  *****/
 @ApiModel(description = "Spec",value = "Spec")
 @Table(name="tb_spec")
