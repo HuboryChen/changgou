@@ -10,5 +10,5 @@ import tk.mybatis.mapper.common.Mapper;
  *
  * 规格
  */
-public interface SpecDao extends Mapper<Spec> {
+public interface SpecMapper extends Mapper<Spec> {
 }

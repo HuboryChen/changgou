@@ -1,6 +1,6 @@
 package com.changgou.service.impl;
 
-import com.changgou.dao.TemplateDao;
+import com.changgou.dao.TemplateMapper;
 import com.changgou.goods.pojo.Template;
 import com.changgou.service.TemplateService;
 import com.github.pagehelper.PageHelper;
@@ -21,7 +21,7 @@ import java.util.List;
 public class TemplateServiceImpl implements TemplateService {
 
     @Autowired
-    private TemplateDao templateDao;
+    private TemplateMapper templateMapper;
 
     /**
      *  分页  +   条件
@@ -36,7 +36,7 @@ public class TemplateServiceImpl implements TemplateService {
         PageHelper.startPage(page,size);
         //查询集合
         Example example = createExample(template);
-        List<Template> templates = templateDao.selectByExample(example);
+        List<Template> templates = templateMapper.selectByExample(example);
         //封装数据
         return new PageInfo<Template>(templates);
     }
@@ -52,7 +52,7 @@ public class TemplateServiceImpl implements TemplateService {
         //实现分页
         PageHelper.startPage(page,size);
         //查询集合
-        List<Template> templates = templateDao.selectAll();
+        List<Template> templates = templateMapper.selectAll();
         //封装数据
         return new PageInfo<Template>(templates);
     }
@@ -67,7 +67,7 @@ public class TemplateServiceImpl implements TemplateService {
         //构造查询条件
         Example example = createExample(template);
         //根据构建的条件查询数据
-        return templateDao.selectByExample(example);
+        return templateMapper.selectByExample(example);
     }
 
     /**
@@ -89,26 +89,26 @@ public class TemplateServiceImpl implements TemplateService {
 
     @Override
     public List<Template> findAll() {
-        return templateDao.selectAll();
+        return templateMapper.selectAll();
     }
 
     @Override
     public Template findById(Integer id) {
-        return templateDao.selectByPrimaryKey(id);
+        return templateMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public void update(Template template) {
-        templateDao.updateByPrimaryKeySelective(template);
+        templateMapper.updateByPrimaryKeySelective(template);
     }
 
     @Override
     public void add(Template template) {
-        templateDao.insertSelective(template);
+        templateMapper.insertSelective(template);
     }
 
     @Override
     public void delete(Integer id) {
-        templateDao.deleteByPrimaryKey(id);
+        templateMapper.deleteByPrimaryKey(id);
     }
 }

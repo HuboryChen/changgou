@@ -8,5 +8,5 @@ import tk.mybatis.mapper.common.Mapper;
  * @Date 2020/3/2 19:19
  * @Version 1.0
  */
-public interface TemplateDao extends Mapper<Template> {
+public interface TemplateMapper extends Mapper<Template> {
 }

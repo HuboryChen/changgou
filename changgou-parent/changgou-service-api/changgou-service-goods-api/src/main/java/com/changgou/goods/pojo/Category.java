@@ -10,6 +10,8 @@ import java.io.Serializable;
  * @Author:admin
  * @Description:Category构建
  * @Date 2019/6/14 19:13
+ *
+ * 商品分类
  *****/
 @ApiModel(description = "Category",value = "Category")
 @Table(name="tb_category")

@@ -1,28 +1,28 @@
 package com.changgou.service;
 
-import com.changgou.goods.pojo.Para;
+
+import com.changgou.goods.pojo.Category;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
  * @Author DL_Wu
- * @Date 2020/3/2 20:23
+ * @Date 2020/3/3 11:33
  * @Version 1.0
  *
- * 参数管理
+ * 商品分类
  */
-public interface ParaService {
-
+public interface CategoryService {
 
     /**
      * 分页 + 多条件
-     * @param para 条件
+     * @param category 条件
      * @param page 当前页
      * @param size  每页数量
      * @return
      */
-    public PageInfo<Para > findPage(Para para,int page, int size);
+    public PageInfo<Category> findPage(Category category, int page, int size);
 
     /**
      * 分页
@@ -30,43 +30,44 @@ public interface ParaService {
      * @param size
      * @return
      */
-    public PageInfo<Para > findPage(int page, int size);
+    public PageInfo<Category > findPage(int page, int size);
 
     /**
      * 多条件
-     * @param para
+     * @param category
      * @return
      */
-    public List<Para> findList(Para para);
+    public List<Category> findList(Category category);
 
     /**
      * 查找所有
      * @return
      */
-    public List<Para> findAll();
+    public List<Category> findAll();
 
     /**
      * 根据id查找
      * @param id
      * @return
      */
-    public Para findById(Integer id);
+    public Category findById(Integer id);
 
     /**
      * 修改
-     * @param para
+     * @param category
      */
-    public void update(Para para);
+    public void update(Category category);
 
     /**
      * 增加
-     * @param para
+     * @param category
      */
-    public void add(Para para);
+    public void add(Category category);
 
     /**
      * 删除
      * @param id
      */
     public void delete(Integer id);
+
 }

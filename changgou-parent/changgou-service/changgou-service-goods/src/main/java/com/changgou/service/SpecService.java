@@ -1,6 +1,7 @@
 package com.changgou.service;
 
 import com.changgou.goods.pojo.Spec;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -12,6 +13,30 @@ import java.util.List;
  * 规格管理
  */
 public interface SpecService {
+
+    /**
+     * 分页 + 多条件
+     * @param spec   条件
+     * @param page   当前页
+     * @param size   每页条数
+     * @return
+     */
+    public PageInfo<Spec> findPage(Spec spec,int page, int size);
+
+    /**
+     * 分页
+     * @param page
+     * @param size
+     * @return
+     */
+    public PageInfo<Spec> findPage(int page, int size);
+
+    /**
+     * 条件查询
+     * @param spec
+     * @return
+     */
+    public List<Spec> findList(Spec spec);
 
     /**
      * 查找所有

@@ -10,5 +10,5 @@ import tk.mybatis.mapper.common.Mapper;
  *
  * 参数管理
  */
-public interface ParaDao  extends Mapper<Para> {
+public interface ParaMapper extends Mapper<Para> {
 }

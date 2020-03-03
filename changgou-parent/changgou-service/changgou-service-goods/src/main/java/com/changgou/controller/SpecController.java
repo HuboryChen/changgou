@@ -2,6 +2,7 @@ package com.changgou.controller;
 
 import com.changgou.goods.pojo.Spec;
 import com.changgou.service.SpecService;
+import com.github.pagehelper.PageInfo;
 import entity.Result;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,44 @@ public class SpecController {
     
     @Autowired
     private SpecService specService;
+
+    /**
+     * 条件 +  分页
+     * @param spec  条件
+     * @param page  当前页
+     * @param size  每页条数
+     * @return
+     */
+    @PostMapping("/search/{page}/{size}")
+    public Result<PageInfo<Spec>> findPage(@RequestBody Spec spec,
+                                           @PathVariable("page")int page,
+                                           @PathVariable("size")int size){
+        PageInfo<Spec> specPage = specService.findPage(spec,page, size);
+        return new Result<>(true,StatusCode.OK,"分页+  条件 查询成功",specPage);
+    }
+
+    /**
+     * 分页
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/search/{page}/{size}")
+    public Result<PageInfo<Spec>> findPage(@PathVariable("page")int page,@PathVariable("size")int size){
+        PageInfo<Spec> specPage = specService.findPage(page, size);
+        return new Result<>(true,StatusCode.OK,"分页查询成功",specPage);
+    }
+
+    /**
+     * 条件查询
+     * @param spec
+     * @return
+     */
+    @PostMapping(value = "/search")
+    public Result<List<Spec>> findList(@RequestBody Spec spec){
+        List<Spec> specList = specService.findList(spec);
+        return new Result<>(true,StatusCode.OK,"多条件查找成功",specList);
+    }
 
     /**
      * 删除 规格
