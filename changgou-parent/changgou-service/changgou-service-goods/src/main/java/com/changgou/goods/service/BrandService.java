@@ -3,11 +3,18 @@ import com.changgou.goods.pojo.Brand;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:Brand业务层接口
  * @Date 2019/6/14 0:16
  *****/
 public interface BrandService {
+
+    /**
+     * 根据分类Id 查询品牌集合
+     * @param categoryId  分类Id
+     * @return
+     */
+    List<Brand> findByCategory(Integer categoryId);
 
     /***
      * Brand多条件分页查询
@@ -64,6 +71,4 @@ public interface BrandService {
      */
     List<Brand> findAll();
 
-
-    List<Brand> findByCategory(Integer id);
 }

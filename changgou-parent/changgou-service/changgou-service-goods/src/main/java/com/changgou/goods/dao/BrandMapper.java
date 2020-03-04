@@ -6,12 +6,18 @@ import tk.mybatis.mapper.common.Mapper;
 import java.util.List;
 
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:Brand的Dao
  * @Date 2019/6/14 0:12
  *****/
 public interface BrandMapper extends Mapper<Brand> {
 
-    @Select(value="select tb.* from tb_brand tb ,tb_category_brand tbc where tb.id = tbc.brand_id and tbc.category_id=#{categoryid}")
-    List<Brand> findByCategory(Integer categoryid);
+    /**
+     * 根据分类Id查询品牌集合
+     * @param categoryId
+     * @return
+     */
+    @Select(value="SELECT tb.*  FROM tb_brand tb , tb_category_brand tcb WHERE tb.id = tcb.brand_id AND tcb.category_id = #{categoryId}")
+    List<Brand> findByCategory(Integer categoryId);
+
 }

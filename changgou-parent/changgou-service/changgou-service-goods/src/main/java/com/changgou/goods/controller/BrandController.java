@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:
  * @Date 2019/6/14 0:18
  *****/
-
 @RestController
 @RequestMapping("/brand")
 @CrossOrigin
@@ -22,6 +21,17 @@ public class BrandController {
 
     @Autowired
     private BrandService brandService;
+
+    /**
+     * 根据分类Id查询品牌集合
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/category/{categoryId}")
+    public Result<List<Brand>> findByCategory(@PathVariable("categoryId") Integer categoryId){
+        List<Brand> brands = brandService.findByCategory(categoryId);
+        return new Result<>(true,StatusCode.OK,"根据分类Id查询品牌集合成功" ,brands);
+    }
 
     /***
      * Brand分页条件搜索实现
@@ -125,15 +135,4 @@ public class BrandController {
     }
 
 
-    /**
-     *
-     * @return
-     */
-    @GetMapping("/category/{id}")
-    public Result<List<Brand>> findBrandByCategory(@PathVariable(name="id") Integer id){
-       List<Brand> brandList = brandService.findByCategory(id);
-
-       return new Result<List<Brand>>(true,StatusCode.OK,"查询品牌列表成功",brandList);
-
-    }
 }

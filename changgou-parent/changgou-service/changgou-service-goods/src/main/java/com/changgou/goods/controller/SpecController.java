@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:
  * @Date 2019/6/14 0:18
  *****/
@@ -21,6 +21,17 @@ public class SpecController {
 
     @Autowired
     private SpecService specService;
+
+    /**
+     * 根据商品分类的ID 查询该分类对应的 规格的列表
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/category/{id}")
+    public Result<List<Spec>> findByCategoryId(@PathVariable("id")Integer categoryId){
+        List<Spec> specList = specService.findByCategoryId(categoryId);
+        return new Result<>(true,StatusCode.OK,"根据分类Id ， 查询规格集合成功！",specList);
+    }
 
     /***
      * Spec分页条件搜索实现
@@ -123,16 +134,4 @@ public class SpecController {
         return new Result<List<Spec>>(true, StatusCode.OK,"查询成功",list) ;
     }
 
-
-    /**
-     * 根据商品分类的ID 查询该分类对应的 规格的列表
-     *
-     */
-
-
-    @GetMapping("/category/{id}")
-    public Result<List<Spec>> findByCategoryId(@PathVariable(name="id") Integer id){
-        List<Spec> specList = specService.findByCategoryId(id);
-        return new Result<List<Spec>>(true,StatusCode.OK,"查询规格的列表成功",specList);
-    }
 }

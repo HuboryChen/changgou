@@ -3,11 +3,20 @@ import com.changgou.goods.pojo.Spec;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:Spec业务层接口
  * @Date 2019/6/14 0:16
+ *
+ * 规格
  *****/
 public interface SpecService {
+
+    /**
+     * 分类ID -> template_id ,根据template——id查询规格集合
+     * @param categoryId
+     * @return
+     */
+    List<Spec> findByCategoryId(Integer categoryId);
 
     /***
      * Spec多条件分页查询
@@ -65,10 +74,5 @@ public interface SpecService {
     List<Spec> findAll();
 
 
-    /**
-     * 根据分类的ID 查询规格的列表数据
-     * @param id 三级分类的ID
-     * @return
-     */
-    List<Spec> findByCategoryId(Integer id);
+
 }

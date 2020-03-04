@@ -1,13 +1,22 @@
 package com.changgou.goods.service;
 import com.changgou.goods.pojo.Category;
 import com.github.pagehelper.PageInfo;
+import io.swagger.models.auth.In;
+
 import java.util.List;
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:Category业务层接口
  * @Date 2019/6/14 0:16
  *****/
 public interface CategoryService {
+
+    /**
+     * 根据父节点ID 查询所有子分类
+     * @param pid
+     * @return
+     */
+    List<Category> findByParentID(Integer pid);
 
     /***
      * Category多条件分页查询

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:
  * @Date 2019/6/14 0:18
  *****/
@@ -23,6 +23,105 @@ public class SpuController {
 
     @Autowired
     private SpuService spuService;
+
+    /**
+     * 恢复删除的商品
+     * @param spuId
+     * @return
+     */
+    @PutMapping("restore/{id}")
+    public Result restore(@PathVariable("id")Long spuId){
+        spuService.restoreSpu(spuId);
+        return new Result(true,StatusCode.OK,"商品恢复成功");
+    }
+
+    /**
+     * 逻辑删除
+     * @param spuId
+     * @return
+     */
+    @DeleteMapping("/logic/delete/{id}")
+    public Result logicDelete(@PathVariable("id")Long spuId){
+        spuService.logicDeleteSpu(spuId);
+        return new Result(true,StatusCode.OK,"逻辑删除成功");
+    }
+
+    /**
+     * 批量 下架
+     * @param ids  要下架的所有Id（spuId）
+     * @return
+     */
+    @PutMapping("/pull/many")
+    public Result pullMany(@RequestBody Long [] ids){
+        int count = spuService.pullMany(ids);
+        return new Result(true,StatusCode.OK,"批量下架"+count+"个商品！！！");
+    }
+
+    /**
+     * 批量上架
+     * @param ids  要上架的所有Id（spuId）
+     * @return
+     */
+    @PutMapping("/put/many")
+    public Result putMany(@RequestBody Long [] ids){
+        int count = spuService.putMany(ids);
+        return new Result(true,StatusCode.OK,"批量上架"+count+"个商品！！！");
+    }
+
+    /**
+     * 商品上架
+     * @param spuId
+     * @return
+     */
+    @PutMapping("/put/{id}")
+    public Result put(@PathVariable("id") Long spuId){
+        spuService.put(spuId);
+        return new Result(true,StatusCode.OK,"商品上架成功");
+    }
+
+    /**
+     * 商品下架
+     * @param spuId
+     * @return
+     */
+    @PutMapping("/pull/{id}")
+    public Result pull(@PathVariable("id") Long spuId){
+        spuService.pull(spuId);
+        return new Result(true,StatusCode.OK,"商品下架成功");
+    }
+
+    /**
+     * 审核商品 自动上架
+     * @param spuId  spu 的id
+     * @return
+     */
+    @PutMapping("/audit/{id}")
+    public Result audit(@PathVariable("id") Long spuId){
+        spuService.auditSpu(spuId);
+        return new Result(true, StatusCode.OK,"商品审核通过！已上架");
+    }
+
+
+    /**
+     * 根据点击到的商品(SPU)的ID 获取到GOODS数据返回给页面展示
+     * @param spuId  spu 的 Id
+     * @return
+     */
+    @GetMapping("goods/{id}")
+    public Result<Goods> findGoodsById(@PathVariable("id") Long spuId){
+        Goods goods = spuService.findGoodsById(spuId);
+        return new Result<>(true,StatusCode.OK,"根据SpuId 查询成功",goods);
+    }
+
+    /**
+     * Goods(SPU+SKU)增加方法详情
+     * @return
+     */
+    @PostMapping("/save")
+    public Result saveGoods(@RequestBody Goods goods){
+        spuService.saveGoods(goods);
+        return new Result(true,StatusCode.OK,"增加商品成功");
+    }
 
     /***
      * Spu分页条件搜索实现
@@ -124,55 +223,5 @@ public class SpuController {
         List<Spu> list = spuService.findAll();
         return new Result<List<Spu>>(true, StatusCode.OK,"查询成功",list) ;
     }
-
-    /**
-     * Goods(SPU+SKU)增加方法详情
-     */
-    @PostMapping("/save")
-    public Result save(@RequestBody Goods goods){
-        spuService.save(goods);
-        return new Result(true,StatusCode.OK,"保存商品成功",null);
-    }
-
-    //根据点击到的商品(SPU)的ID 获取到GOODS数据返回给页面展示
-    @GetMapping("/goods/{id}")
-    public Result<Goods> findGoodsById(@PathVariable(value="id") Long id){
-        Goods goods = spuService.findGoodsById(id);
-        return new Result<Goods>(true,StatusCode.OK,"查询goods数据成功",goods);
-    }
-
-
-
-    /**
-     * //审核商品 自动上架
-     * @param id  spu的ID
-     * @return
-     */
-    @PutMapping("/audit/{id}")
-    public Result auditSpu(@PathVariable(name="id")Long id){
-        spuService.auditSpu(id);
-        return new Result(true,StatusCode.OK,"审核通过");
-    }
-
-    @PutMapping("/pull/{id}")
-    public Result pullSpu(@PathVariable(name="id")Long id){
-        spuService.pullSpu(id);
-        return new Result(true,StatusCode.OK,"下架成功");
-    }
-
-    @DeleteMapping("/logic/delete/{id}")
-    public Result logicDeleteSpu(@PathVariable(name="id")Long id){
-        spuService.logicDeleteSpu(id);
-        return new Result(true,StatusCode.OK,"逻辑删除成功");
-    }
-
-    @PutMapping("/restore/{id}")
-    public Result restore(@PathVariable(name="id")Long id){
-        spuService.restoreSpu(id);
-        return new Result(true,StatusCode.OK,"还原成功");
-    }
-
-
-
 
 }

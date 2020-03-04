@@ -3,7 +3,7 @@ import com.changgou.goods.pojo.StockBack;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:StockBack业务层接口
  * @Date 2019/6/14 0:16
  *****/

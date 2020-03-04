@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 import java.util.List;
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:Category业务层接口实现类
  * @Date 2019/6/14 0:16
  *****/
@@ -20,6 +20,19 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
+    /**
+     * 根据父节点ID 查询所有子分类
+     * @param pid 父节点ID -> 1及分类 = 0
+     * @return
+     */
+    @Override
+    public List<Category> findByParentID(Integer pid) {
+        //根据父 id 查询 select * from tab_category Where parent_id = #{id}
+        //封装一个JavaBean ,如果改JavaBean指定属性不为空，则会将指定属性作为查询条件
+        Category category = new Category();
+        category.setParentId(pid);
+        return categoryMapper.select(category);
+    }
 
     /**
      * Category条件+分页查询

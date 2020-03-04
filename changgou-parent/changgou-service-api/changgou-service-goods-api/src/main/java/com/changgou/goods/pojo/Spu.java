@@ -78,7 +78,7 @@ public class Spu implements Serializable{
 	private String isDelete;//是否删除
 
     @Column(name = "status")
-	private String status;//审核状态
+	private String status;//审核状态   1审核通过   0 未审核或者审核不通过
 
 
 

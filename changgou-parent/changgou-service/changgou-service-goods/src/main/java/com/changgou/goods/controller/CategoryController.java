@@ -5,12 +5,13 @@ import com.github.pagehelper.PageInfo;
 import entity.Result;
 import entity.StatusCode;
 
+import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:
  * @Date 2019/6/14 0:18
  *****/
@@ -22,6 +23,17 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+
+    /**
+     * 根据父ID 查询该分类下的所有的子分类列表   如果是一级分类 pid = 0
+     * @param pid
+     * @return
+     */
+    @GetMapping("/list/{pid}")
+    public Result<List<Category>> findByParentId(@PathVariable("pid")Integer pid){
+        List<Category> categories = categoryService.findByParentId(pid);
+        return new Result<>(true,StatusCode.OK,"查询子节点成功",categories);
+    }
 
     /***
      * Category分页条件搜索实现
@@ -124,17 +136,7 @@ public class CategoryController {
         return new Result<List<Category>>(true, StatusCode.OK,"查询成功",list) ;
     }
 
-    /**
-     *  根据父ID 查询该分类下的所有的子分类列表   如果是一级分类 pid = 0
-     * @param pid
-     * @return
-     */
-    @GetMapping("/list/{pid}")
-    public Result<List<Category>> findByParentId(@PathVariable(name="pid") Integer pid){
-        //SELECT * from tb_category where parent_id=0
-        List<Category> categoryList = categoryService.findByParentId(pid);
-        return new Result<List<Category>>(true,StatusCode.OK,"查询分类列表成功",categoryList);
-    }
+
 
 
 }

@@ -16,7 +16,7 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.List;
 
 /****
- * @Author:admin
+ * @Author: DL_Wu
  * @Description:Spec业务层接口实现类
  * @Date 2019/6/14 0:16
  *****/
@@ -29,6 +29,23 @@ public class SpecServiceImpl implements SpecService {
     @Autowired
     private CategoryMapper categoryMapper;
 
+
+    /**
+     * 分类ID -> template_id ,根据template——id查询规格集合
+     *
+     *  select * from tb_spec where template_id = 42
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<Spec> findByCategoryId(Integer categoryId) {
+        //查询分类数据， 获取template_id
+        Category category = categoryMapper.selectByPrimaryKey(categoryId);
+        //根据template_id 查询集合
+        Spec spec = new Spec();
+        spec.setTemplateId(category.getTemplateId());
+        return specMapper.select(spec);
+    }
 
     /**
      * Spec条件+分页查询
@@ -153,27 +170,9 @@ public class SpecServiceImpl implements SpecService {
         return specMapper.selectByPrimaryKey(id);
     }
 
-    /**
-     * 查询Spec全部数据
-     *
-     * @return
-     */
     @Override
     public List<Spec> findAll() {
         return specMapper.selectAll();
     }
 
-    @Override
-    public List<Spec> findByCategoryId(Integer id) {
-        //1.先根据商品分类的ID 获取模板的ID
-        //select template_id from tb_category where id = 1216
-
-        Category category = categoryMapper.selectByPrimaryKey(id);
-        //2.再根据模板的ID 获取模板对应的规格的列表
-        // select * from tb_spec where template_id = 43
-        Spec condition = new Spec();
-        condition.setTemplateId(category.getTemplateId());
-        //3.返回
-        return specMapper.select(condition);//where template_id = 43
-    }
 }
