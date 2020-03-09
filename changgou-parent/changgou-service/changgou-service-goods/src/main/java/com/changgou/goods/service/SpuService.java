@@ -1,5 +1,6 @@
 package com.changgou.goods.service;
 import com.changgou.goods.pojo.Goods;
+import com.changgou.goods.pojo.Sku;
 import com.changgou.goods.pojo.Spu;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  * @Date 2019/6/14 0:16
  *****/
 public interface SpuService {
+
 
 
     /**

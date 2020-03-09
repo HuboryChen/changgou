@@ -14,7 +14,7 @@ import java.util.List;
  * @Date 2020/3/8 17:08
  * @Version 1.0
  */
-@FeignClient(name = "content")
+@FeignClient(name = "content")   //调用content微服务
 @RequestMapping(value = "/content")
 public interface ContentFeign {
 
